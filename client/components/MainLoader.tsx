@@ -9,26 +9,24 @@ const MainLoader = () => {
   const [hideNow, setHideNow] = useState(false);
   const [hidden, setHidden] = useState(false);
 
+  // Lock scroll while loader is visible
   useEffect(() => {
-    if (!hidden) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow = hidden ? "auto" : "hidden";
   }, [hidden]);
+
+  // Unmount loader after animation completes
+  if (hidden) return null;
 
   return (
     <motion.div
-      className={`min-h-screen bg-white ${hidden ? "hidden" : ""}`}
+      className="fixed inset-0 z-50 bg-white"
       initial={{ y: 0 }}
       animate={{ y: hideNow ? "-100%" : 0 }}
       transition={{ duration: 0.8, ease: "easeInOut", delay: 0.5 }}
-      onAnimationComplete={() => {
-        if (hideNow) setHidden(true);
-      }}
+      onAnimationComplete={() => hideNow && setHidden(true)}
     >
       <div className="flex items-center justify-center h-screen">
-        <p className="z-10 whitespace-pre-wrap text-center text-4xl font-medium tracking-tight text-gray-700">
+        <p className="z-10 text-center text-4xl font-medium tracking-tight text-gray-700">
           Loading...
         </p>
         <Ripple mainCircleSize={250} />
