@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { NumberTicker } from "./magicui/number-ticker";
 import { Ripple } from "./magicui/ripple";
 import { motion } from "motion/react";
+import { ChartNoAxesCombined } from "lucide-react";
 
 const MainLoader = () => {
   const [hideNow, setHideNow] = useState(false);
@@ -26,14 +27,15 @@ const MainLoader = () => {
       onAnimationComplete={() => hideNow && setHidden(true)}
     >
       <div className="flex items-center justify-center h-screen">
-        <p className="z-10 text-center text-4xl font-medium tracking-tight text-gray-700">
-          Loading...
-        </p>
+        <div className="flex flex-col justify-center items-center z-10 text-center text-gray-700">
+          <ChartNoAxesCombined size={80} />
+          <span className="text-xl mt-2 pl-2">Loading...</span>
+        </div>
         <Ripple mainCircleSize={250} />
       </div>
 
       <NumberTicker
-        className="absolute right-12 bottom-0 font-bold text-[10rem] tracking-tighter"
+        className="absolute right-12 bottom-0 font-bold text-[10rem] tracking-wide"
         value={100}
         setHideNow={setHideNow}
       />

@@ -1,8 +1,20 @@
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:3000"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,        # allow this origin
+    allow_credentials=True,       # allow cookies/auth headers
+    allow_methods=["*"],          # allow all HTTP methods
+    allow_headers=["*"],          # allow all headers
+)
 
 @app.get("/")
 def read_root():

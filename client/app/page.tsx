@@ -2,6 +2,7 @@
 
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggler";
 import { BorderBeam } from "@/components/magicui/border-beam";
 import { NumberTicker } from "@/components/magicui/number-ticker";
 import { Safari } from "@/components/magicui/safari";

@@ -1,0 +1,98 @@
+[
+  {
+    "id": "1",
+    "title": "User 1",
+    "sub": "1111111111",
+    "content": "No assets connected. Only saving account balance present."
+  },
+  {
+    "id": "2",
+    "title": "User 2",
+    "sub": "2222222222",
+    "content": "All assets connected (Banks account, EPF, Indian stocks, US stocks, Credit report). Large mutual fund portfolio with 9 funds."
+  },
+  {
+    "id": "3",
+    "title": "User 3",
+    "sub": "3333333333",
+    "content": "All assets connected (Banks account, EPF, Indian stocks, US stocks, Credit report). Small mutual fund portfolio with only 1 fund."
+  },
+  {
+    "id": "4",
+    "title": "User 4",
+    "sub": "4444444444",
+    "content": "All assets connected (Banks account, EPF, Indian stocks, US stocks). Small mutual fund portfolio with only 1 fund. With 2 UAN account connected. With 3 different bank with multiple account in them. Only have transactions for 2 bank accounts."
+  },
+  {
+    "id": "5",
+    "title": "User 5",
+    "sub": "5555555555",
+    "content": "All assets connected except credit score (Banks account, EPF, Indian stocks, US stocks). Small mutual fund portfolio with only 1 fund. With 3 different bank with multiple account in them. Only have transactions for 2 bank accounts."
+  },
+  {
+    "id": "6",
+    "title": "User 6",
+    "sub": "6666666666",
+    "content": "All assets connected except bank account (EPF, Indian stocks, US stocks). Large mutual fund portfolio with 9 funds. No bank account connected."
+  },
+  {
+    "id": "7",
+    "title": "User 7",
+    "sub": "7777777777",
+    "content": "Debt-Heavy Low Performer. A user with mostly underperforming mutual funds, high liabilities (credit card & personal loans). Poor MF returns (XIRR < 5%). No diversification (all equity, few funds). Credit score < 650. High credit card usage, multiple loans. Negligible net worth or negative."
+  },
+  {
+    "id": "8",
+    "title": "User 8",
+    "sub": "8888888888",
+    "content": "SIP Samurai. Consistently invests every month in multiple mutual funds via SIP. 3–5 active SIPs in MFs. Moderate returns (XIRR 8–12%)."
+  },
+  {
+    "id": "9",
+    "title": "User 9",
+    "sub": "9999999999",
+    "content": "Fixed Income Fanatic. Strong preference for low-risk investments like debt mutual funds and fixed deposits. 80% of investments in debt MFs. Occasional gold ETF (Optional). Consistent but slow net worth growth (XIRR ~ 8-10%)."
+  },
+  {
+    "id": "10",
+    "title": "User 10",
+    "sub": "1010101010",
+    "content": "Precious Metal Believer. High allocation to gold and fixed deposits, minimal equity exposure. Gold MFs/ETFs ~50% of investment. Conservative SIPs in gold funds. FDs and recurring deposits. Minimal equity exposure."
+  },
+  {
+    "id": "11",
+    "title": "User 11",
+    "sub": "1212121212",
+    "content": "Dormant EPF Earner. Has EPF account but employer stopped contributing; balance stagnant. EPF balance > ₹2 lakh. Interest not being credited. No private investment."
+  },
+  {
+    "id": "12",
+    "title": "User 12",
+    "sub": "1414141414",
+    "content": "Salary Sinkhole. User’s salary is mostly consumed by EMIs and credit card bills. Salary credit every month. 70% goes to EMIs and credit card dues. Low or zero investment. Credit score ~600–650."
+  },
+  {
+    "id": "13",
+    "title": "User 13",
+    "sub": "1313131313",
+    "content": "Balanced Growth Tracker. Well-diversified portfolio with EPF, MFs, stocks, and some US exposure. High EPF contribution. SIPs in equity & hybrid MFs. International MFs/ETFs 10–20%. Healthy net worth growth. Good credit score (750+)."
+  },
+  {
+    "id": "14",
+    "title": "User 14",
+    "sub": "2020202020",
+    "content": "Starter Saver. Recently started investing, low ticket sizes, few transactions. Just 1–2 MFs, started < 6 months ago. SIP ₹500–₹1000. Minimal bank balance, no debt."
+  },
+  {
+    "id": "15",
+    "title": "User 15",
+    "sub": "2121212121",
+    "content": "Dual Income Dynamo. Has freelance + salary income; cash flow is uneven but investing steadily. Salary + multiple credits from UPI apps. MF investments irregular but increasing. High liquidity in bank accounts. Credit score above 700. Occasional business loans or overdraft."
+  },
+  {
+    "id": "16",
+    "title": "User 16",
+    "sub": "2525252525",
+    "content": "Live-for-Today. High income but spends it all. Investments are negligible or erratic. Salary > ₹2L/month. High food, shopping, travel spends. No SIPs, maybe one-time MF buy. Credit card dues often roll over. Credit score < 700, low or zero net worth."
+  }
+]
