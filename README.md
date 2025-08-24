@@ -15,4 +15,4 @@ In addition, the platform features an **AI chatbot** that answers user queries i
 4. **Personalized Insights**  
    - Provide tailored recommendations based on spending habits and patterns.  
 5. **Visualization Dashboard**  
-   - Graphs and charts to help users understand trends at a glance.  
+   - Graphs and charts to help users understand trends at a glance.
