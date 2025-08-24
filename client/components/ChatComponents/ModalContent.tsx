@@ -45,7 +45,7 @@ const items = [
 ];
 
 const ModalContent = () => {
-  const { profile, setProfile } = useProfile();
+  const { profile, setProfile, setPhone } = useProfile();
   return (
     <div className="mx-6">
       <Accordion type="single" collapsible className="w-full" defaultValue="3">
@@ -77,7 +77,10 @@ const ModalContent = () => {
                           ? "border-green-500"
                           : "border-[#ccc]"
                       }`}
-                      onClick={() => setProfile(item.id)}
+                      onClick={() => {
+                        setProfile(item.id);
+                        setPhone(item.sub);
+                      }}
                     >
                       <Check
                         size={34}

@@ -7,7 +7,7 @@ const NavBar = () => {
     <nav
       className="fixed bg-white dark:bg-black w-[80%] top-4 left-1/2 transform -translate-x-1/2 border border-[#ccc] px-4 rounded-2xl py-2 z-10"
       style={{
-        boxShadow: "var(--shadow-acternity)",
+        boxShadow: "var(--shadow-aceternity)",
       }}
     >
       <div className="flex justify-between items-center">

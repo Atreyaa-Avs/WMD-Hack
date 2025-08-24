@@ -15,7 +15,7 @@ const page = () => {
   const { profile } = useProfile();
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen overflow-hidden">
       {/* Header */}
       <div className="flex justify-between items-center w-full py-4 px-3 border-b-[3px]">
         <Button onClick={() => router.back()} className="cursor-pointer">

@@ -30,14 +30,14 @@ export default function ChangeUserModal() {
       <DialogContent className="flex flex-col gap-0 p-0 sm:max-h-[min(640px,80vh)] sm:max-w-lg md:max-w-xl xl:max-w-6xl [&>button:last-child]:hidden">
         <div className="overflow-y-auto">
           <DialogHeader className="contents space-y-0 text-left">
-            <div className="flex justify-between items-end py-3">
-              <DialogTitle className="px-6 pt-6">Change User</DialogTitle>
-              <DialogTrigger asChild className="pr-4 mr-2">
+            <div className="flex justify-between items-end py-6">
+              <DialogTitle className="px-6">Change User</DialogTitle>
+              <DialogTrigger asChild className="pr-4 mr-10">
                 <Button
                   variant="outline"
                   className="text-red-500 hover:text-red-700"
                 >
-                  <CircleX />
+                  <CircleX size={40}/>
                 </Button>
               </DialogTrigger>
             </div>
