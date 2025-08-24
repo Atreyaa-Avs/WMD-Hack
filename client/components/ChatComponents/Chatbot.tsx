@@ -3,19 +3,13 @@
 import {
   PromptInput,
   PromptInputButton,
-  PromptInputModelSelect,
-  PromptInputModelSelectContent,
-  PromptInputModelSelectItem,
-  PromptInputModelSelectTrigger,
-  PromptInputModelSelectValue,
   PromptInputSubmit,
   PromptInputTextarea,
   PromptInputToolbar,
   PromptInputTools,
 } from "@/components/ai-elements/prompt-input";
-import { GlobeIcon, MicIcon } from "lucide-react";
-import { useState } from "react";
-import { Chat, useChat } from "@ai-sdk/react";
+import { GlobeIcon } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
 import {
   Conversation,
   ConversationContent,
@@ -25,84 +19,105 @@ import { Message, MessageContent } from "@/components/ai-elements/message";
 import { Response } from "@/components/ai-elements/response";
 import { BorderBeam } from "../magicui/border-beam";
 
-const models = [
-  { id: "Gemini", name: "Gemini-2.5-Flash" },
-  //   { id: 'claude-opus-4-20250514', name: 'Claude 4 Opus' },
-];
+interface MessageType {
+  id: string;
+  role: "user" | "assistant";
+  text: string;
+  temporary?: boolean; // mark as thinking message
+}
 
 const Chatbot = () => {
   const [text, setText] = useState<string>("");
-  const [model, setModel] = useState<string>(models[0].id);
-  const { messages, status, sendMessage } = useChat();
+  const [messages, setMessages] = useState<MessageType[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    sendMessage(
-      { text },
-      {
-        body: { model },
-      }
-    );
+    if (!text) return;
+
+    // User message
+    const userMessage: MessageType = {
+      id: crypto.randomUUID(),
+      role: "user",
+      text,
+    };
+
+    // Temporary assistant message
+    const thinkingMessage: MessageType = {
+      id: crypto.randomUUID(),
+      role: "assistant",
+      text: "Thinking...",
+      temporary: true,
+    };
+
+    // Add both messages
+    setMessages((prev) => [...prev, userMessage, thinkingMessage]);
     setText("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: [...messages.map((m) => ({ role: m.role, content: m.text })), { role: "user", content: userMessage.text }],
+        }),
+      });
+
+      if (!res.ok) throw new Error("Failed to fetch response");
+      const data = await res.json();
+
+      // Replace temporary message with real response
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.temporary ? { ...m, text: data.text || "No response", temporary: false } : m
+        )
+      );
+    } catch (err) {
+      console.error(err);
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.temporary ? { ...m, text: "Error fetching response", temporary: false } : m
+        )
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="h-screen max-w-4xl mx-auto p-6 flex flex-col rounded-lg border dark:bg-gray-900 relative">
-      {/* Messages scrollable area */}
+    <div className="max-w-4xl mx-auto p-6 flex flex-col rounded-lg border dark:bg-gray-900 relative">
       <div className="flex-1 overflow-auto mb-4 w-full">
         <Conversation className="w-full">
           <ConversationContent>
             {messages.map((message) => (
               <Message from={message.role} key={message.id}>
                 <MessageContent>
-                  {message.parts.map((part, i) =>
-                    part.type === "text" ? (
-                      <Response key={`${message.id}-${i}`}>
-                        {part.text}
-                      </Response>
-                    ) : null
-                  )}
+                  <Response>{message.text}</Response>
                 </MessageContent>
               </Message>
             ))}
+            <div ref={messagesEndRef} />
           </ConversationContent>
           <ConversationScrollButton />
         </Conversation>
       </div>
 
-      {/* Fixed prompt input */}
       <PromptInput
         onSubmit={handleSubmit}
         className="fixed bottom-5 2xl:bottom-10 left-1/2 -translate-x-1/2 w-full max-w-3xl 2xl:max-w-4xl dark:bg-gray-800 shadow-sm shadow-amber-400 dark:shadow-amber-500"
       >
         <BorderBeam duration={6} size={100} borderWidth={2} />
-        <PromptInputTextarea
-          onChange={(e) => setText(e.target.value)}
-          value={text}
-        />
+        <PromptInputTextarea onChange={(e) => setText(e.target.value)} value={text} />
         <PromptInputToolbar>
           <PromptInputTools>
-            <PromptInputButton>
+            <PromptInputButton disabled={loading}>
               <GlobeIcon size={16} />
-              <span>Search</span>
+              <span>Send</span>
             </PromptInputButton>
-            <PromptInputModelSelect
-              onValueChange={(value) => setModel(value)}
-              value={model}
-            >
-              <PromptInputModelSelectTrigger>
-                <PromptInputModelSelectValue />
-              </PromptInputModelSelectTrigger>
-              <PromptInputModelSelectContent>
-                {models.map((m) => (
-                  <PromptInputModelSelectItem key={m.id} value={m.id}>
-                    {m.name}
-                  </PromptInputModelSelectItem>
-                ))}
-              </PromptInputModelSelectContent>
-            </PromptInputModelSelect>
           </PromptInputTools>
-          <PromptInputSubmit disabled={!text} status={status} />
+          <PromptInputSubmit disabled={!text || loading} />
         </PromptInputToolbar>
       </PromptInput>
     </div>
