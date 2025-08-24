@@ -23,7 +23,7 @@ interface MessageType {
   id: string;
   role: "user" | "assistant";
   text: string;
-  temporary?: boolean; // mark as thinking message
+  temporary?: boolean;
 }
 
 const Chatbot = () => {
@@ -36,14 +36,12 @@ const Chatbot = () => {
     e.preventDefault();
     if (!text) return;
 
-    // User message
     const userMessage: MessageType = {
       id: crypto.randomUUID(),
       role: "user",
       text,
     };
 
-    // Temporary assistant message
     const thinkingMessage: MessageType = {
       id: crypto.randomUUID(),
       role: "assistant",
@@ -51,7 +49,6 @@ const Chatbot = () => {
       temporary: true,
     };
 
-    // Add both messages
     setMessages((prev) => [...prev, userMessage, thinkingMessage]);
     setText("");
     setLoading(true);
