@@ -8,8 +8,8 @@ interface ProfileState {
 }
 
 export const useProfile = create<ProfileState>((set) => ({
-  profile: "1",
-  phone: "1111111111",
+  profile: "13",
+  phone: "1313131313",
   setProfile: (profile) => set({ profile }),
   setPhone: (phone) => set({ phone }),
 }));

@@ -28,39 +28,125 @@ def read_root():
 def get_status():
     return {"status": "OK", "port": 5000}
 
-@app.get("/data/{phone_no}")
-def get_data(phone_no: int):
+@app.get("/fetch_bank_transactions/{phone_no}")
+def get_bank_txns_data(phone_no: int):
     folder_path = BASE_DIR / str(phone_no)
+    file_name = "fetch_bank_transactions.json"
+
+    if not folder_path.exists() or not folder_path.is_dir():
+        raise HTTPException(status_code=404, detail="Folder not found")
     
-    # Check if folder exists
+    file_path = folder_path / file_name
+
+    data = {}
+
+    if file_path.exists():
+        with open(file_path,"r") as f:
+            try:
+                data[file_name.replace(".json", "")] = json.load(f)
+            except json.JSONDecodeError:
+                data[file_name.replace(".json", "")] = {"error": "Invalid JSON"}
+    else:
+        # Optional: handle missing files
+        data[file_name.replace(".json", "")] = None
+    
+    return data
+
+@app.get("/fetch_credit_report/{phone_no}")
+def get_credit_report_data(phone_no: int):
+    folder_path = BASE_DIR / str(phone_no)
+    file_name = "fetch_credit_report.json"
+
+    if not folder_path.exists() or not folder_path.is_dir():
+        raise HTTPException(status_code=404, detail="Folder not found")
+    
+    file_path = folder_path / file_name
+
+    data = {}
+
+    if file_path.exists():
+        with open(file_path,"r") as f:
+            try:
+                data[file_name.replace(".json", "")] = json.load(f)
+            except json.JSONDecodeError:
+                data[file_name.replace(".json", "")] = {"error": "Invalid JSON"}
+    else:
+        # Optional: handle missing files
+        data[file_name.replace(".json", "")] = None
+    
+    return data
+
+@app.get("/fetch_epf_details/{phone_no}")
+def get_epf_details_data(phone_no: int):
+    folder_path = BASE_DIR / str(phone_no)
+    file_name = "fetch_epf_details.json"
+    file_path = folder_path / file_name
+
     if not folder_path.exists() or not folder_path.is_dir():
         raise HTTPException(status_code=404, detail="Folder not found")
 
-    combined_data = {}
+    if not file_path.exists():
+        return {"message": f"{file_name} not found for {phone_no}"}
 
-    # List of expected JSON files
-    json_files = [
-        "fetch_bank_transactions.json",
-        "fetch_credit_report.json",
-        "fetch_epf_details.json",
-        "fetch_mf_transactions.json",
-        "fetch_net_worth.json",
-        "fetch_stock_transactions.json"
-    ]
+    try:
+        with open(file_path, "r") as f:
+            return json.load(f)
+    except json.JSONDecodeError:
+        return {"message": f"{file_name} contains invalid JSON"}
+    
+@app.get("/fetch_mf_transactions/{phone_no}")
+def get_mf_txns(phone_no: int):
+    folder_path = BASE_DIR / str(phone_no)
+    file_name = "fetch_mf_transactions.json"
+    file_path = folder_path / file_name
 
-    for file_name in json_files:
-        file_path = folder_path / file_name
-        if file_path.exists():
-            with open(file_path, "r") as f:
-                try:
-                    combined_data[file_name.replace(".json", "")] = json.load(f)
-                except json.JSONDecodeError:
-                    combined_data[file_name.replace(".json", "")] = {"error": "Invalid JSON"}
-        else:
-            # Optional: handle missing files
-            combined_data[file_name.replace(".json", "")] = None
+    if not folder_path.exists() or not folder_path.is_dir():
+        raise HTTPException(status_code=404, detail="Folder not found")
 
-    return combined_data
+    if not file_path.exists():
+        return {"message": f"{file_name} not found for {phone_no}"}
+
+    try:
+        with open(file_path, "r") as f:
+            return json.load(f)
+    except json.JSONDecodeError:
+        return {"message": f"{file_name} contains invalid JSON"}
+    
+@app.get("/fetch_net_worth/{phone_no}")
+def get_net_worth(phone_no: int):
+    folder_path = BASE_DIR / str(phone_no)
+    file_name = "fetch_net_worth.json"
+    file_path = folder_path / file_name
+
+    if not folder_path.exists() or not folder_path.is_dir():
+        raise HTTPException(status_code=404, detail="Folder not found")
+
+    if not file_path.exists():
+        return {"message": f"{file_name} not found for {phone_no}"}
+
+    try:
+        with open(file_path, "r") as f:
+            return json.load(f)
+    except json.JSONDecodeError:
+        return {"message": f"{file_name} contains invalid JSON"}
+    
+@app.get("/fetch_stock_transactions/{phone_no}")
+def get_stock_transactions(phone_no: int):
+    folder_path = BASE_DIR / str(phone_no)
+    file_name = "fetch_stock_transactions.json"
+    file_path = folder_path / file_name
+
+    if not folder_path.exists() or not folder_path.is_dir():
+        raise HTTPException(status_code=404, detail="Folder not found")
+
+    if not file_path.exists():
+        return {"message": f"{file_name} not found for {phone_no}"}
+
+    try:
+        with open(file_path, "r") as f:
+            return json.load(f)
+    except json.JSONDecodeError:
+        return {"message": f"{file_name} contains invalid JSON"}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=5000)

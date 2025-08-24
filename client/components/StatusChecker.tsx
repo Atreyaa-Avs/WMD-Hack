@@ -21,9 +21,9 @@ export default function StatusChecker() {
   if (error instanceof Error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="flex justify-between p-4 mx-3 border rounded shadow-[var(--shadow-aceternity)] mt-3">
+    <div className="flex justify-between p-4 mx-3 border rounded shadow-[var(--shadow-aceternity)] mt-3 dark:border-[2px] dark:border-white">
       <h2 className="text-lg font-bold">API Status</h2>
-      <p className="flex items-center gap-1 font-medium">
+      <div className="flex items-center gap-1 font-medium">
         {isLoading ? (
           <p>Connecting...</p>
         ) : (
@@ -32,7 +32,7 @@ export default function StatusChecker() {
             {data?.status}
           </>
         )}
-      </p>
+      </div>
     </div>
   );
 }

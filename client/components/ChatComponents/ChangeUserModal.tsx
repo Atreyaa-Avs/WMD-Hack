@@ -16,18 +16,17 @@ import ModalContent from "./ModalContent";
 import { useState } from "react";
 
 export default function ChangeUserModal() {
-  const [isOpen, setIsOpen] = useState(false);
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button
           variant="outline"
-          className="dark:bg-neutral-200 dark:text-black"
+          className="cursor-pointer dark:bg-neutral-200 dark:hover:bg-neutral-300 dark:text-black"
         >
           Change Current User
         </Button>
       </DialogTrigger>
-      <DialogContent className="flex flex-col gap-0 p-0 sm:max-h-[min(640px,80vh)] sm:max-w-lg md:max-w-xl xl:max-w-6xl [&>button:last-child]:hidden">
+      <DialogContent className="flex flex-col gap-0 p-0 sm:max-h-[min(640px,80vh)] sm:max-w-lg md:max-w-xl xl:max-w-4xl 2xl:max-w-6xl [&>button:last-child]:hidden dark:bg-gray-800">
         <div className="overflow-y-auto">
           <DialogHeader className="contents space-y-0 text-left">
             <div className="flex justify-between items-end py-6">
@@ -43,7 +42,7 @@ export default function ChangeUserModal() {
             </div>
           </DialogHeader>
           <ModalContent />
-          <DialogFooter className="px-6 pb-6 sm:justify-end">
+          <DialogFooter className="px-6 pb-6 sm:justify-center">
             <DialogClose asChild>
               <Button type="button" variant="outline">
                 Close

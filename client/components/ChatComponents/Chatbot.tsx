@@ -23,6 +23,7 @@ import {
 } from "@/components/ai-elements/conversation";
 import { Message, MessageContent } from "@/components/ai-elements/message";
 import { Response } from "@/components/ai-elements/response";
+import { BorderBeam } from "../magicui/border-beam";
 
 const models = [
   { id: "Gemini", name: "Gemini-2.5-Flash" },
@@ -46,36 +47,35 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 h-full flex flex-col rounded-lg border dark:bg-gray-900">
+    <div className="h-screen max-w-4xl mx-auto p-6 flex flex-col rounded-lg border dark:bg-gray-900 relative">
       {/* Messages scrollable area */}
-      <div className="relative z-0">
-          <div className="flex-1 overflow-auto mb-4">
-            <Conversation>
-              <ConversationContent>
-                {messages.map((message) => (
-                  <Message from={message.role} key={message.id}>
-                    <MessageContent>
-                      {message.parts.map((part, i) => {
-                        if (part.type === "text") {
-                          return (
-                            <Response key={`${message.id}-${i}`}>
-                              {part.text}
-                            </Response>
-                          );
-                        }
-                        return null;
-                      })}
-                    </MessageContent>
-                  </Message>
-                ))}
-              </ConversationContent>
-              <ConversationScrollButton />
-            </Conversation>
-          </div>
+      <div className="flex-1 overflow-auto mb-4 w-full">
+        <Conversation className="w-full">
+          <ConversationContent>
+            {messages.map((message) => (
+              <Message from={message.role} key={message.id}>
+                <MessageContent>
+                  {message.parts.map((part, i) =>
+                    part.type === "text" ? (
+                      <Response key={`${message.id}-${i}`}>
+                        {part.text}
+                      </Response>
+                    ) : null
+                  )}
+                </MessageContent>
+              </Message>
+            ))}
+          </ConversationContent>
+          <ConversationScrollButton />
+        </Conversation>
       </div>
 
       {/* Fixed prompt input */}
-      <PromptInput onSubmit={handleSubmit} className="-mt-14 z-10 w-full">
+      <PromptInput
+        onSubmit={handleSubmit}
+        className="fixed bottom-5 2xl:bottom-10 left-1/2 -translate-x-1/2 w-full max-w-3xl 2xl:max-w-4xl dark:bg-gray-800 shadow-sm shadow-amber-400 dark:shadow-amber-500"
+      >
+        <BorderBeam duration={6} size={100} borderWidth={2} />
         <PromptInputTextarea
           onChange={(e) => setText(e.target.value)}
           value={text}

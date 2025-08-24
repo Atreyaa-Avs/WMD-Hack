@@ -29,13 +29,13 @@ const MainLoader = () => {
       <div className="flex items-center justify-center h-screen">
         <div className="flex flex-col justify-center items-center z-10 text-center text-gray-700">
           <ChartNoAxesCombined size={80} />
-          <span className="text-xl mt-2 pl-2">Loading...</span>
+          <span className="text-base mt-2 pl-2">Loading...</span>
         </div>
-        <Ripple mainCircleSize={250} />
+        <Ripple mainCircleSize={200} numCircles={6}/>
       </div>
 
       <NumberTicker
-        className="absolute right-12 bottom-0 font-bold text-[10rem] tracking-wide"
+        className="absolute right-12 bottom-0 font-bold xl:text-9xl 2xl:text-[10rem] tracking-wide"
         value={100}
         setHideNow={setHideNow}
       />

@@ -54,13 +54,13 @@ const ModalContent = () => {
             value={item.id}
             key={item.id}
             className={`py-2 px-4 rounded-sm ${
-              profile === item.id && "bg-green-300"
+              profile === item.id && "bg-green-500"
             }`}
           >
             <AccordionPrimitive.Header className="flex">
               <AccordionPrimitive.Trigger className="focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-center justify-between rounded-md py-2 text-left text-[15px] leading-6 font-semibold transition-all outline-none focus-visible:ring-[3px] [&[data-state=open]>svg]:rotate-180">
                 <span className="flex flex-col space-y-1">
-                  <span className="text-xl">{item.title}</span>
+                  <span className="text-2xl">{item.title}</span>
                   <span className="flex items-center gap-1">
                     <PhoneCall size={18} />:
                     {item.sub && (
@@ -72,7 +72,7 @@ const ModalContent = () => {
                   {/* Check button */}
                   <DialogClose asChild>
                     <Button
-                      className={`bg-gray-200 border-[3px] hover:bg-gray-300 ${
+                      className={`bg-gray-200 border-[3px] hover:bg-gray-300 hover:cursor-pointer  ${
                         profile === item.title
                           ? "border-green-500"
                           : "border-[#ccc]"
@@ -84,11 +84,8 @@ const ModalContent = () => {
                     >
                       <Check
                         size={34}
-                        className={`pointer-events-none shrink-0 transition-transform duration-200 ${
-                          profile === item.title
-                            ? "text-green-500 opacity-100"
-                            : "text-gray-400 opacity-60"
-                        }`}
+                        strokeWidth={5}
+                        className={`shrink-0 transition-transform duration-200 text-green-500 opacity-100`}
                       />
                     </Button>
                   </DialogClose>
@@ -100,7 +97,7 @@ const ModalContent = () => {
                 </div>
               </AccordionPrimitive.Trigger>
             </AccordionPrimitive.Header>
-            <AccordionContent className="text-black font-medium text-xl pb-2">
+            <AccordionContent className="dark:text-white text-black font-medium text-base 2xl:text-xl pb-2">
               {item.content}
             </AccordionContent>
           </AccordionItem>
