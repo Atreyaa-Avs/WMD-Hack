@@ -1,4 +1,4 @@
-# Fi-MCP Financial Insights   
+# Fi-MCP Financial Insights    
 
 ## Overview
 Fi-MCP Financial Insights is a project that connects to **Fi's MCP server** to securely access a user’s financial data. The system generates automated **financial analysis**, visualizations, and insights to help users understand their spending, saving, and investment patterns.  
