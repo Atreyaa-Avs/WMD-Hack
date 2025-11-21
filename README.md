@@ -1,6 +1,6 @@
 # Fi-MCP Financial Insights    
 
-## Overview
+## Overview 
 Fi-MCP Financial Insights is a project that connects to **Fi's MCP server** to securely access a user’s financial data. The system generates automated **financial analysis**, visualizations, and insights to help users understand their spending, saving, and investment patterns.  
 
 In addition, the platform features an **AI chatbot** that answers user queries in natural language — from basic account information to deeper financial insights — making financial management more interactive and intuitive.  
